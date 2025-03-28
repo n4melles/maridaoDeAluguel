@@ -1,0 +1,35 @@
+// Seleciona o elemento de entrada (input) com o ID 'filter'
+const filterElement = document.querySelector('#filter');
+
+// Seleciona todos os itens de lista (li) dentro do elemento com a classe 'cards'
+const cards = document.querySelectorAll('.cards li');
+
+// Adiciona um evento de 'input' ao elemento de filtro, que chama a função filterCards sempre que o valor do input muda
+filterElement.addEventListener('input', filterCards);
+
+// Define a função filterCards que filtra os cartões com base no valor do input
+function filterCards() {
+    // Verifica se o valor do input não está vazio
+    if (filterElement.value !== '') {
+        // Itera sobre cada cartão na lista de cartões
+        for (let card of cards) {
+            // Seleciona o título (h2) do cartão atual
+            let title = card.querySelector('h2');
+            // Obtém o texto do título e o converte para minúsculas para facilitar a comparação
+            title = title.textContent.toLowerCase();
+            // Verifica se o título do cartão inclui o texto do input (também em minúsculas)
+            if (title.includes(filterElement.value.toLowerCase())) {
+                // Se incluir, exibe o cartão
+                card.style.display = 'block';
+            } else {
+                // Se não incluir, oculta o cartão
+                card.style.display = 'none';
+            }
+        }
+    } else {
+        // Se o input estiver vazio, exibe todos os cartões
+        for (let card of cards) {
+            card.style.display = 'block';
+        }
+    }
+}
